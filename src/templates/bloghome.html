@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block js %}
+      <script>
+      let previews=document.getElementsByClassName('preview');
+      Array.from(previews).forEach((element))=>{
+          element.innerHTML=element.innerText;
+      })
+      
+      {% endblock js %}
+
+{% block content %}
+
+<div class="container mt-4 mb-4">
+  <h3>Read The Best Blog</h3>
+  
+  <div class="row">
+    {% for post in allposts%}
+    <div class="col-lg-4">
+      <div class="card shadow" style="width: 18rem;">
+        <img src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" class="card-img-top" alt="...">
+        <div class="card-body">
+          <strong class="d-inline-block mb-2 text-primary">Article  by {{post.author}}</strong>
+          <h5 class="mb-0"><a class="text-dark" href="{{post.slug}}">{{post.title}}</a></h5>
+          <div class="mb-1 text-muted">{{post.datetime}}</div>
+          <p class="card-text"><div class="preview">{{post.content|safe| truncatechars:300}}</div></p>
+          <button class="btn btn-success text-white"><i class="fa-solid fa-thumbs-up"></i></button>
+          <a href="{{post.slug}}" role="button" class="btn btn-danger">View Blog</a>
+        </div>
+      </div>
+    </div>
+       
+  
+  {% endfor %}
+</div>
+</div>
+
+
+
+{% endblock content %}
